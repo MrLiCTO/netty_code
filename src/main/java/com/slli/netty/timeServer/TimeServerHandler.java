@@ -11,14 +11,16 @@ import java.util.Date;
  * Created by Administrator on 2017/4/13.
  */
 public class TimeServerHandler extends ChannelInboundHandlerAdapter{
+    private int counter;
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf buf= (ByteBuf) msg;
+        /*ByteBuf buf= (ByteBuf) msg;
         byte[] req=new byte[buf.readableBytes()];
         buf.readBytes(req);
-        String body = new String(req, "utf-8");
-        System.out.println("服务端接收到:"+body);
-        String res=""+new Date();
+        String body = new String(req, "utf-8");*/
+        String body= (String) msg;
+        System.out.println("服务端接收到:"+body+"~~~"+(++counter));
+        String res=""+new Date()+System.getProperty("line.separator");
         ByteBuf copiedBuffer = Unpooled.copiedBuffer(res.getBytes());
         ctx.write(copiedBuffer);
     }
