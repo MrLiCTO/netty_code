@@ -18,7 +18,7 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter{
         buf.readBytes(req);
         String body = new String(req, "utf-8");
         System.out.println("服务端接收到:"+body);
-        String res="好好好,服务端收到了,时间:"+new Date();
+        String res=""+new Date();
         ByteBuf copiedBuffer = Unpooled.copiedBuffer(res.getBytes());
         ctx.write(copiedBuffer);
     }

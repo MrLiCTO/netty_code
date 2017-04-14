@@ -5,23 +5,22 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-import java.util.Date;
-
 /**
  * Created by Administrator on 2017/4/13.
  */
 public class TimeClientHandler extends ChannelInboundHandlerAdapter{
-    private final ByteBuf byteBuf;
-
-    public TimeClientHandler() {
-        byte[] req=("客户端请求:你好,时间:"+new Date()).getBytes();
-        System.out.println(new String(req));
-        byteBuf= Unpooled.buffer(req.length);
-        byteBuf.writeBytes(req);
-    }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("结束了...");
+    }
+
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        byte[] req=("你好服务端,几点了?").getBytes();
+        //System.out.println(new String(req));
+        ByteBuf byteBuf= Unpooled.buffer(req.length);
+        byteBuf.writeBytes(req);
         ctx.writeAndFlush(byteBuf);
     }
 
@@ -31,7 +30,7 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter{
         byte[] bytes=new byte[((ByteBuf) msg).readableBytes()];
         buf.readBytes(bytes);
         String res = new String(bytes, "utf-8");
-        System.out.println(res);
+        System.out.println("客户端收到当前时间:"+res);
     }
 
     @Override

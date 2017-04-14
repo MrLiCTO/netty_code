@@ -1,5 +1,6 @@
 package com.slli.netty.timeServer;
 
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -16,8 +17,8 @@ public class TimeClient {
     public void connect(int port,String ip) throws Exception{
         EventLoopGroup workLoopGroup=new NioEventLoopGroup();
         try{
-            Bootstrap Bootstrap = new Bootstrap();
-            ChannelFuture channelFuture = Bootstrap.group(workLoopGroup)
+            Bootstrap client = new Bootstrap();
+            client.group(workLoopGroup)
                     .channel(NioSocketChannel.class)
                     .option(ChannelOption.TCP_NODELAY, true)
                     .handler(new ChannelInitializer<SocketChannel>() {
@@ -25,7 +26,8 @@ public class TimeClient {
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             socketChannel.pipeline().addLast(new TimeClientHandler());
                         }
-                    }).connect(ip, port).sync();
+                    });
+            ChannelFuture channelFuture = client.connect(ip, port).sync();
             channelFuture.channel().closeFuture().sync();
         }catch (Exception e){
             e.printStackTrace();
