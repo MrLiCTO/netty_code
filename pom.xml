@@ -21,11 +21,34 @@
       <version>4.8.1</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>io.netty</groupId>
       <artifactId>netty-all</artifactId>
       <version>4.1.9.Final</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.msgpack</groupId>
+      <artifactId>msgpack</artifactId>
+      <version>0.6.12</version>
+    </dependency>
+    <dependency>
+      <groupId>javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>3.12.0.SP1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.marshalling</groupId>
+      <artifactId>jboss-marshalling</artifactId>
+      <version>1.4.11.Final</version>
+    </dependency>
+      <dependency>
+          <groupId>org.jboss.marshalling</groupId>
+          <artifactId>jboss-marshalling-serial</artifactId>
+          <version>1.4.11.Final</version>
+      </dependency>
   </dependencies>
 
   <build>

@@ -10,6 +10,8 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  */
 public class TimeClientHandler extends ChannelInboundHandlerAdapter{
     private int counter;
+
+    private String delimiter="_$";
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("结束了...");
@@ -18,7 +20,8 @@ public class TimeClientHandler extends ChannelInboundHandlerAdapter{
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         for (int i = 0; i < 100; i++) {
-            byte[] req=("你好服务端,几点了?"+System.getProperty("line.separator")).getBytes();
+            byte[] req=("你好服务端,几点了?"+delimiter).getBytes();
+            //byte[] req=("你好服务端,几点了?"+System.getProperty("line.separator")).getBytes();
             //System.out.println(new String(req));
             ByteBuf byteBuf= Unpooled.buffer(req.length);
             byteBuf.writeBytes(req);

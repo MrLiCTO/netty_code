@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class TimeServerHandler extends ChannelInboundHandlerAdapter{
     private int counter;
+    private String delimiter="_$";
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         /*ByteBuf buf= (ByteBuf) msg;
@@ -20,7 +21,8 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter{
         String body = new String(req, "utf-8");*/
         String body= (String) msg;
         System.out.println("服务端接收到:"+body+"~~~"+(++counter));
-        String res=""+new Date()+System.getProperty("line.separator");
+        String res=new Date()+delimiter;
+        //String res=""+new Date()+System.getProperty("line.separator");
         ByteBuf copiedBuffer = Unpooled.copiedBuffer(res.getBytes());
         ctx.write(copiedBuffer);
     }
